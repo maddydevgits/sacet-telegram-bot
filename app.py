@@ -77,7 +77,8 @@ def send_welcome(message):
  incomingBot.reply_to(message, "Welcome to CertiBot, do Enter your complete Roll No")
 
 def listener(messages):
- for m in messages:
+ try:
+  for m in messages:
      m=str(m)
      m=m.split(',')
      chat_id=m[-7].split(' ')[-1]
@@ -98,14 +99,13 @@ def listener(messages):
          if(flag==0):
              incomingBot.send_message(int(chat_id),'Please provide your registered Roll No')
              pass
+ except:
+     pass
                 
-
-
-
-   
-
 incomingBot.set_update_listener(listener)
 incomingBot.polling()
+
+
 
 
 
