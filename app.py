@@ -76,6 +76,10 @@ incomingBot = telebot.TeleBot(bot_token, parse_mode=None)
 def send_welcome(message):
  incomingBot.reply_to(message, "Welcome to CertiBot, do Enter your complete Roll No")
 
+@incomingBot.message_handler(regexp="[a-zA-Z0-9_]")
+def handle_message(message):
+    print('dummy',message)
+
 def listener(messages):
  try:
   for m in messages:
