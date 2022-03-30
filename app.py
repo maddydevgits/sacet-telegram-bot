@@ -1,7 +1,8 @@
 
+from matplotlib.font_manager import json_load
 import telegram
 import telebot
-import json
+import ast
 
 rollNos=['20AT1A3145',
 '21AT5A3101',
@@ -68,7 +69,7 @@ rollNos=['20AT1A3145',
 '20AT1A3018'
 ]
 
-bot_token='5158373344:AAG1mRkN8uRAD-6uTHczvZ4k6x3stuMh-rc'
+bot_token='5158373344:AAG1mRkN8uRAD-6uTHczvZ4k6x3stuMh-rc' 
 outgoingBot=telegram.Bot(bot_token)
 incomingBot = telebot.TeleBot(bot_token, parse_mode=None) 
 
@@ -78,35 +79,22 @@ def send_welcome(message):
 
 @incomingBot.message_handler(regexp="[a-zA-Z0-9_]")
 def handle_message(message):
-    print('dummy',message)
+    #print('dummy',message)
+    message=str(message)
+    k=ast.literal_eval(message)
+    #print(k,type(k))
+    chat_id=(k['from_user']['id'])
+    m=k['text'].upper()
+    #print(m)
+    flag=0
+    for i in rollNos:
+        if(i.upper()==m):
+            flag=1
+            incomingBot.send_message(int(chat_id),'Hey, Hi Buddy\n\nNice meeting you ' + i + ', you can download the certificate at https://makeskilled.com/con/certificates/'+ i + '.pdf' + '\n\nThank You \nMake Skilled Team')
+    if(flag==0):
+        incomingBot.send_message(int(chat_id),'Please provide your registered Roll No')
+        pass
 
-def listener(messages):
- try:
-  for m in messages:
-     m=str(m)
-     m=m.split(',')
-     chat_id=m[-7].split(' ')[-1]
-     print(chat_id)
-     k=m[-1]
-     if(k.startswith(" 'type'")):
-         print('command received')
-     elif(k.startswith(" 'text'")):
-         print('text received')
-         k=k.split("'")[-2]
-         print(k)
-         k=k.upper()
-         flag=0
-         for i in rollNos:
-             if(i.upper()==k):
-                 flag=1
-                 incomingBot.send_message(int(chat_id),'Hey, Hi Buddy\n\nNice meeting you ' + i + ', you can download the certificate at https://makeskilled.com/con/certificates/'+ i + '.pdf' + '\n\nThank You \nMake Skilled Team')
-         if(flag==0):
-             incomingBot.send_message(int(chat_id),'Please provide your registered Roll No')
-             pass
- except:
-     pass
-                
-incomingBot.set_update_listener(listener)
 incomingBot.polling()
 
 
