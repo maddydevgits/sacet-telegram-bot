@@ -1,5 +1,5 @@
+# heroku ps:scale worker=1
 
-from matplotlib.font_manager import json_load
 import telegram
 import telebot
 import ast
