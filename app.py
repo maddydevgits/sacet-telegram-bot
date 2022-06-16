@@ -1,6 +1,5 @@
 # heroku ps:scale worker=1
 
-import telegram
 import telebot
 import pandas as pd
 
@@ -13,7 +12,6 @@ for i in data:
     Rollno.append(i[0])
 
 bot_token='5407360483:AAHGRDXt8Wppf4OMH_zfTiaZ0fG6HJ9qQkM' 
-outgoingBot=telegram.Bot(bot_token)
 incomingBot = telebot.TeleBot(bot_token, parse_mode=None) 
 
 @incomingBot.message_handler(commands=['start', 'help'])
