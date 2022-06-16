@@ -2,8 +2,8 @@
 
 import telegram
 import telebot
-import ast
 import pandas as pd
+
 data=pd.read_excel("studentsdata.xlsx")
 data=data.iloc[:,:].values
 data=list(data)
@@ -11,7 +11,6 @@ Rollno=[]
 for i in data:
     print(i)
     Rollno.append(i[0])
-
 
 bot_token='5407360483:AAHGRDXt8Wppf4OMH_zfTiaZ0fG6HJ9qQkM' 
 outgoingBot=telegram.Bot(bot_token)
@@ -43,11 +42,3 @@ def handle_message(message):
         pass
 
 incomingBot.polling()
-
-
-
-
-
-
-
-
