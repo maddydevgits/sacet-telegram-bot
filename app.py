@@ -3,9 +3,6 @@
 import telegram
 import telebot
 import ast
-
-
-
 import pandas as pd
 data=pd.read_excel("studentsdata.xlsx")
 data=data.iloc[:,:].values
