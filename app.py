@@ -2,6 +2,7 @@
 
 import telebot
 import pandas as pd
+import ast
 
 data=pd.read_excel("studentsdata.xlsx")
 data=data.iloc[:,:].values
